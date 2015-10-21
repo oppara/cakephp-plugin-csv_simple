@@ -1,0 +1,24 @@
+{
+  "name": "oppara/csv_simple",
+  "type": "cakephp-plugin",
+  "description": "Component Plugin which handle csv data",
+  "keywords": ["cakephp", "csv"],
+  "license": "MIT",
+  "homepage": "https://github.com/oppara/cakephp-plugin-csv_simple",
+  "authors": [
+    {
+      "name": "oppara",
+      "email": "oppara@oppara.tv"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "composer/installers" : "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=3.7"
+  },
+  "extra": {
+    "installer-name": "CsvSimple"
+  }
+}
