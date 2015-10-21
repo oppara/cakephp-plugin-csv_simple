@@ -1,7 +1,7 @@
 {
   "name": "oppara/csv_simple",
   "type": "cakephp-plugin",
-  "description": "Component Plugin which handle csv data",
+  "description": "CakePHP plugin which handle csv data",
   "keywords": ["cakephp", "csv"],
   "license": "MIT",
   "homepage": "https://github.com/oppara/cakephp-plugin-csv_simple",
