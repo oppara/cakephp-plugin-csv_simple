@@ -108,7 +108,7 @@ class CsvImportComponentTest extends CakeTestCase
     /**
      * @test
      */
-    public function createGeneratorWithSimpleCsvWithHeader3()
+    public function createGeneratorWithSimpleCsvWithThreeRowsHeader()
     {
         $path = $this->dir . 'simple_with_header3.csv';
         $files = $this->makeFiles($path);
