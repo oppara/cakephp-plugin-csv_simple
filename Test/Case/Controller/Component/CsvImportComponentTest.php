@@ -10,20 +10,20 @@ class CsvImportTestModel extends CakeTestModel
 class CsvImportTestController extends Controller
 {
 
-    public $uses = array(
+    public $uses = [
         'CsvImportTestModel',
-    );
+    ];
 
-    public $components = array(
+    public $components = [
         'CsvSimple.CsvImport',
-    );
+    ];
 }
 
 class CsvImportComponentTest extends CakeTestCase
 {
-    public $fixtures = array(
+    public $fixtures = [
         'plugin.CsvSimple.csv_import_test_model',
-    );
+    ];
 
     public function setUp()
     {
