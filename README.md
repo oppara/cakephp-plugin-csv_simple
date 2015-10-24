@@ -12,6 +12,8 @@ handle csv data
 
 ## Installation
 
+composer.json
+
     {
         "require": {
             "oppara/csv_simple": "*"
@@ -26,13 +28,15 @@ app/Config/bootstrap.php:
 `CakePlugin::load('CsvSimple');` or `CakePlugin::loadAll();`
 
 
-## Import sample
+## Sample
+
+import
 
     <?php
     App::uses('AppController', 'Controller');
     App::uses('CsvImportComponent', 'CsvSimple.Controller/Component');
 
-    class SomeController extends Controller
+    class FooController extends AppController
     {
         public $components = [
             'CsvSimple.CsvImport',
