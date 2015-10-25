@@ -42,28 +42,60 @@ import
             'CsvSimple.CsvImport',
         ];
 
+        public $uses = [
+            'Bar',
+        ];
+
         public function import()
         {
             if ($this->request->is('get')) {
                 return;
             }
 
-            $this->CsvImport->headerRows = 1;
-            $csv = Hash::get($this->request->data, 'Csv.file');
-            $fields = $this->Model->getFieldsName();
-
-            $this->Model->begin();
             try {
+                $csv = Hash::get($this->request->data, 'Csv.file');
+
+                $this->CsvImport->headerRows = 1;
                 $gen = $this->CsvImport->createGenerator($csv);
+
+                $this->Bar->begin();
                 foreach ($gen as $idx => $row) {
-                    $data = array_combine($fields, $row);
-                    $this->Model->create();
-                    $this->Model->import($data);
+                    $this->Bar->import($row);
                 }
-                $this->Model->commit();
+                $this->Bar->commit();
             }
             catch(Exception$e) {
-                $this->Model->rollback();
+                $this->Bar->rollback();
+                $this->set('error', $e->getMessage());
+            }
+        }
+
+        public function download()
+        {
+            try {
+                $filename = date('Ymdhis') . '.tsv';
+                $this->CsvExport->delimiter = "\t";
+
+                $data = $this->Bar->find('all');
+                $this->CsvExport->download($data, $filename);
+            }
+            catch(Exception$e) {
+                $this->set('error', $e->getMessage());
+            }
+        }
+
+        public function export()
+        {
+            try {
+                $path = '/path/to/export.csv';
+
+                $fields = $this->Bar->getHeaderFields();
+                $this->CsvExport->setHeader($fields);
+
+                $data = $this->Bar->find('all');
+                $this->CsvExport->export($data, $path);
+            }
+            catch(Exception$e) {
                 $this->set('error', $e->getMessage());
             }
         }
