@@ -180,7 +180,12 @@ class CsvExportComponent extends Component
      */
     protected function _printHeaders($filename)
     {
-        header('Content-Type: application/x-csv');
-        header('Content-disposition: attachment;filename=' . $filename);
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private',false);
+        header('Content-Type: application/force-download');
+        header('Content-disposition: attachment; filename=' . $filename);
+        header('Content-Transfer-Encoding: binary');
     }
 }
