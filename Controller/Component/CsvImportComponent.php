@@ -79,6 +79,7 @@ class CsvImportComponent extends Component
     public function createGenerator($files)
     {
         $this->_checkError($files['error']);
+        $this->_checkType($files['type']);
 
         $path = $files['tmp_name'];
         $tmp = $this->_createSplTempFileObject($path);
@@ -154,4 +155,18 @@ class CsvImportComponent extends Component
         }
     }
 
+    /**
+     * check $_FILES[field_name]['type']
+     *
+     * @param string $type mime type
+     * @access protected
+     * @throws RuntimeException
+     */
+    protected function _checkType($type)
+    {
+        if ($type != 'text/csv' && $type != 'text/plain') {
+            $message = sprintf(__d('csv_simple', 'The uploaded file\'s mime type is invalid. %s'), $type);
+            throw new RuntimeException($message);
+        }
+    }
 }

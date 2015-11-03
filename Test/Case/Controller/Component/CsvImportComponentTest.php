@@ -223,10 +223,31 @@ class CsvImportComponentTest extends CakeTestCase
         }
     }
 
+    /**
+     * @test
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage image/png
+     */
+    public function throwExceptionWhenPngfileUploaded()
+    {
+        $path = $this->dir . '10x10.png';
+        $files = $this->makeFiles($path);
+        $g = $this->Controller->CsvImport->createGenerator($files);
+        foreach ($g as $idx => $row) {
+        }
+    }
+
     protected function makeFiles($path, $error = UPLOAD_ERR_OK)
     {
+        $type = 'text/plain';
+        if (is_file($path)) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $type = finfo_file($finfo, $path);
+        }
+
         return [
             'tmp_name' => $path,
+            'type' => $type,
             'error' => $error,
         ];
     }
