@@ -1,0 +1,15 @@
+
+msgid "The uploaded file's type is invalid. %s"
+msgstr "CSVファイル以外のファイルがアップロードされたようです。アップロードされたファイルを確認してください。"
+
+msgid "Could not read file. %s"
+msgstr "アップロードされたファイルを読み込めませんでした。"
+
+msgid "No file was uploaded"
+msgstr "アップロードするファイルを選択してください。"
+
+msgid "The uploaded file exceeds max file size. error:%d"
+msgstr "アップロードできるファイルサイズの上限を超えています。"
+
+msgid "Unknown error:%d"
+msgstr "予期しないエラーが発生しました。type: %d"
