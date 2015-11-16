@@ -19,6 +19,20 @@ class CsvImportTestController extends Controller
     ];
 }
 
+class CsvImportTestMimeTypeController extends Controller
+{
+
+    public $uses = [
+        'CsvImportTestModel',
+    ];
+
+    public $components = [
+        'CsvSimple.CsvImport' => [
+            'types' => ['application/vnd.ms-excel', 'application/excel'],
+        ],
+    ];
+}
+
 class CsvImportComponentTest extends CakeTestCase
 {
     public $fixtures = [
@@ -235,6 +249,21 @@ class CsvImportComponentTest extends CakeTestCase
         $g = $this->Controller->CsvImport->createGenerator($files);
         foreach ($g as $idx => $row) {
         }
+    }
+
+    /**
+     * @test
+     */
+    public function addAllowedMimeType()
+    {
+        $request = new CakeRequest(null, false);
+        $this->Controller = new CsvImportTestMimeTypeController($request, $this->getMock('CakeResponse'));
+        $this->Controller->constructClasses();
+
+        $types = $this->Controller->CsvImport->types;
+        $this->assertEquals(7, count($types));
+        $this->assertTrue(in_array('application/vnd.ms-excel', $types));
+        $this->assertTrue(in_array('application/excel', $types));
     }
 
     protected function makeFiles($path, $error = UPLOAD_ERR_OK)

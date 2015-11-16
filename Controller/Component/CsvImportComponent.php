@@ -67,6 +67,38 @@ class CsvImportComponent extends Component
      */
     public $escape = '\\';
 
+    /**
+     *  allowed mime types.
+     *
+     * @var array
+     * @access public
+     */
+    public $types = [
+        'text/csv',
+        'text/plain',
+        'text/comma-separated-values',
+        'application/x-csv',
+        'application/csv',
+    ];
+
+    /**
+     * Constructor
+     *
+     * @param ComponentCollection $collection
+     * @param array $settings
+     * @return void
+     * @access public
+     */
+    public function __construct(ComponentCollection $collection, $settings = array())
+    {
+        if (isset($settings['types'])) {
+            $types = $settings['types'];
+            $this->types = array_merge($this->types, $settings['types']);
+            unset($settings['types']);
+        }
+
+        parent::__construct($collection, $settings);
+    }
 
     /**
      * Create rows generator
@@ -164,7 +196,7 @@ class CsvImportComponent extends Component
      */
     protected function _checkType($type)
     {
-        if ($type != 'text/csv' && $type != 'text/plain') {
+        if (!in_array($type, $this->types)) {
             $message = sprintf(__d('csv_simple', 'The uploaded file\'s mime type is invalid. %s'), $type);
             throw new RuntimeException($message);
         }
