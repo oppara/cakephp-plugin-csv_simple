@@ -1,6 +1,5 @@
-
-msgid "The uploaded file's type is invalid. %s"
-msgstr "CSVファイル以外のファイルがアップロードされたようです。アップロードされたファイルを確認してください。"
+msgid "The uploaded file's mime type is invalid. %s"
+msgstr "CSVファイル以外のファイル(%s)がアップロードされたようです。アップロードされたファイルを確認してください。"
 
 msgid "Could not read file. %s"
 msgstr "アップロードされたファイルを読み込めませんでした。"
