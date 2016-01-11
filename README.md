@@ -40,6 +40,7 @@ import
     {
         public $components = [
             'CsvSimple.CsvImport',
+            'CsvSimple.CsvExport',
         ];
 
         public $uses = [
