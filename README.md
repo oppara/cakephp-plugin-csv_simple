@@ -30,11 +30,11 @@ app/Config/bootstrap.php:
 
 ## Sample
 
-import
 
     <?php
     App::uses('AppController', 'Controller');
     App::uses('CsvImportComponent', 'CsvSimple.Controller/Component');
+    App::uses('CsvExportComponent', 'CsvSimple.Controller/Component');
 
     class FooController extends AppController
     {
