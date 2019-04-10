@@ -33,7 +33,7 @@ class CsvImportComponent extends Component
      * @access public
      * @see mb_convert_variables
      */
-    public $fromEncoding = 'UTF-8,SJIS-win';
+    public $fromEncoding = 'SJIS-win';
 
     /**
      * specify LC_ALL locale.
