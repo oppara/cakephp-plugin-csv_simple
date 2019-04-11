@@ -1,5 +1,6 @@
 <?php
 App::uses('Component', 'Controller');
+App::uses('CsvSimpleTrait', 'CsvSimple.Lib');
 
 /**
  * import csv data
@@ -9,6 +10,7 @@ App::uses('Component', 'Controller');
  */
 class CsvImportComponent extends Component
 {
+    use CsvSimpleTrait;
 
     /**
      * number of headers row.
@@ -31,7 +33,6 @@ class CsvImportComponent extends Component
      *
      * @var string
      * @access public
-     * @see mb_convert_variables
      */
     public $fromEncoding = 'SJIS-win';
 
@@ -148,7 +149,7 @@ class CsvImportComponent extends Component
         setlocale(LC_ALL, $this->locale);
 
         $data = file_get_contents($path);
-        mb_convert_variables($this->toEncoding, $this->fromEncoding, $data);
+        $this->_convert_variables($data);
 
         $tmp = new SplTempFileObject(0);
         $tmp->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE | SplFileObject::READ_CSV);
