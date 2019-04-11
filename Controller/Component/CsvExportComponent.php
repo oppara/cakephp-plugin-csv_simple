@@ -1,5 +1,6 @@
 <?php
 App::uses('Component', 'Controller');
+App::uses('CsvSimpleTrait', 'CsvSimple.Lib');
 
 /**
  * export csv data
@@ -9,6 +10,7 @@ App::uses('Component', 'Controller');
  */
 class CsvExportComponent extends Component
 {
+    use CsvSimpleTrait;
 
     /**
      * encoding that the string is being converted to.
@@ -114,7 +116,8 @@ class CsvExportComponent extends Component
         $file = new SplFileObject($path, 'w');
         $file->setCsvControl($this->delimiter, $this->enclosure, $this->escape);
 
-        mb_convert_variables($this->toEncoding, $this->fromEncoding, $this->_headers, $data);
+        $this->_convert_variables($this->_headers);
+        $this->_convert_variables($data);
 
         if (!empty($this->_headers)) {
             $file->fputcsv($this->_headers);
