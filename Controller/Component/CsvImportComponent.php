@@ -152,7 +152,7 @@ class CsvImportComponent extends Component
         $this->_convert_variables($data);
 
         $tmp = new SplTempFileObject(0);
-        $tmp->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE | SplFileObject::READ_CSV);
+        $tmp->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
         $tmp->setCsvControl($this->delimiter, $this->enclosure, $this->escape);
         $tmp->fwrite($data);
         $tmp->rewind();
